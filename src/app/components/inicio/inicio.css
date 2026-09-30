@@ -1,0 +1,10 @@
+.card-categoria {
+  transition: transform 0.2s ease;
+}
+.card-categoria:hover {
+  transform: translateY(-5px);
+}
+.img-producto {
+  height: 180px;
+  object-fit: cover;
+}

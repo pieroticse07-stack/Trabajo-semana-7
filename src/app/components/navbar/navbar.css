@@ -1,0 +1,7 @@
+.navbar-brand {
+  letter-spacing: 1px;
+}
+.nav-link.active {
+  color: #0d6efd !important;
+  font-weight: bold;
+}

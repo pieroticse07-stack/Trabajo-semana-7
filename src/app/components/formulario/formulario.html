@@ -1,0 +1,70 @@
+<div class="row">
+  <!-- Formulario de Registro -->
+  <div class="col-12 col-lg-5 mb-4">
+    <div class="card shadow-sm border-0">
+      <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Registrar Reseña</h4>
+      </div>
+      <div class="card-body">
+        
+        <!-- Alerta de Bootstrap controlada mediante Signal[cite: 3] -->
+        @if (alertaExito()) {
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>¡Gracias!</strong> Tu reseña ha sido guardada correctamente.
+            <button type="button" class="btn-close" (click)="alertaExito.set(false)"></button>
+          </div>
+        }
+
+        <form (ngSubmit)="guardarResena()">
+          <div class="mb-3">
+            <label class="form-label font-weight-bold">Nombre Completo</label>
+            <input type="text" class="form-control" [(ngModel)]="cliente" name="cliente" placeholder="Ej. Juan Pérez" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Comentario o Valoración</label>
+            <textarea class="form-control" rows="3" [(ngModel)]="comentario" name="comentario" placeholder="Escribe tu experiencia..." required></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Puntuación</label>
+            <select class="form-select" [(ngModel)]="valoracion" name="valoracion">
+              <option [value]="5">⭐⭐⭐⭐⭐ (5 - Excelente)</option>
+              <option [value]="4">⭐⭐⭐⭐ (4 - Muy Bueno)</option>
+              <option [value]="3">⭐⭐⭐ (3 - Bueno)</option>
+              <option [value]="2">⭐⭐ (2 - Regular)</option>
+              <option [value]="1">⭐ (1 - Malo)</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100">Publicar Reseña</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vista de Reseñas Almacenadas en la Signal[cite: 3] -->
+  <div class="col-12 col-lg-7">
+    <h4 class="mb-3">Reseñas de nuestros Clientes ({{ resenas().length }})</h4>
+
+    <div class="row g-3">
+      @for (item of resenas(); track $index) {
+        <div class="col-12">
+          <div class="card border-start border-4 border-primary shadow-sm">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <h6 class="fw-bold mb-0 text-dark">{{ item.cliente }}</h6>
+                <span class="badge bg-warning text-dark">⭐ {{ item.valoracion }} / 5</span>
+              </div>
+              <p class="card-text text-muted mb-0">"{{ item.comentario }}"</p>
+            </div>
+          </div>
+        </div>
+      } @empty {
+        <div class="col-12">
+          <div class="alert alert-info">No hay reseñas registradas en este momento.</div>
+        </div>
+      }
+    </div>
+  </div>
+</div>
